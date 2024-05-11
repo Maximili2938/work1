@@ -1,0 +1,3 @@
+name: Pixel
+version: '${project.version}'
+main: fake.pixel.Gul
