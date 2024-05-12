@@ -11,8 +11,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -36,24 +34,6 @@ public class ItemSecond implements IItem {
                 .withEnchantments(Collections.singletonMap(Enchantment.LUCK, 5))
                 .withFlags(Arrays.asList(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS))
                 .build();
-    }
-
-    @Override
-    public void onInteract(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        ItemStack item = event.getItem();
-        if (item != null && item.isSimilar(getItem())) {
-            applyFireEffectsAndParticles(player, true);
-        }
-    }
-
-    @Override
-    public void onDrag(InventoryDragEvent event) {
-        ItemStack item = event.getOldCursor();
-        Player player = (Player) event.getWhoClicked();
-        if (item != null && item.isSimilar(getItem())) {
-            applyFireEffectsAndParticles(player, true);
-        }
     }
 
     @Override
