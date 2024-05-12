@@ -23,7 +23,6 @@ public class ItemThird implements IItem {
 
     @Override
     public ItemStack getItem() {
-
         return new ItemBuilder(Material.BLAZE_ROD)
                 .withDisplayName("§bИфритовый стержень §7(RARE)")
                 .withLore(Arrays.asList("§7Тип: Ифритовый стержень", "§7Редкость: §eRARE"))
