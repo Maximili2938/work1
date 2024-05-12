@@ -5,8 +5,11 @@ import fake.pixel.api.IItem;
 import fake.pixel.api.itemconstructor.ItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.TNTPrimed;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemFlag;
@@ -28,18 +31,26 @@ public class ItemFirst implements IItem, Listener {
                 .build();
     }
 
-    @Override
+    @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
-        Runnable task = (Runnable) new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
-                if (event.getItemDrop().isOnGround()) {
-                    Location location = event.getItemDrop().getLocation();
-                    location.getWorld().spawn(location, TNTPrimed.class);
-                    event.getItemDrop().remove();
+                if (event.getItemDrop().isOnGround()) {;
+                    explodeTNT(event.getItemDrop().getLocation(), event.getItemDrop());
                     this.cancel();
                 }
             }
         }.runTaskTimer(Gul.getInstance(), 1, 1);
+    }
+
+    private void explodeTNT(Location location, Item itemDrop) {
+        TNTPrimed tnt = location.getWorld().spawn(location, TNTPrimed.class);
+        tnt.setYield(0); 
+        
+        itemDrop.remove();
+        tnt.remove();
+        
+        location.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, location, 9);
     }
 }
