@@ -29,13 +29,17 @@ public class ItemThird implements IItem {
 
     @Override
     public void onInteractEntity(PlayerInteractEntityEvent interactionEvent) {
-        if (interactionEvent.getRightClicked() instanceof LivingEntity) {
-            LivingEntity entity = (LivingEntity) interactionEvent.getRightClicked();
-            Player player = interactionEvent.getPlayer();
-            if (player.hasPermission("blindness.use")) {
-                entity.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
-                player.sendMessage("Ты выдал эффект для сущности " + entity.getName() + ".");
-            }
+        if (!(interactionEvent.getRightClicked() instanceof LivingEntity)) {
+            return;
         }
+
+        Player player = interactionEvent.getPlayer();
+        if (!player.hasPermission("blindness.use")) {
+            return;
+        }
+
+        LivingEntity entity = (LivingEntity) interactionEvent.getRightClicked();
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
+        player.sendMessage("Ты выдал эффект для сущности " + entity.getName() + ".");
     }
 }
