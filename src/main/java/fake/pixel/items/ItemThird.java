@@ -2,15 +2,11 @@ package fake.pixel.items;
 
 import fake.pixel.api.IItem;
 import fake.pixel.api.itemconstructor.ItemBuilder;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -32,15 +28,14 @@ public class ItemThird implements IItem {
     }
 
     @Override
-    public void onInteractEntity(PlayerInteractEntityEvent event) {
-        if (event.getRightClicked() instanceof LivingEntity) {
-            LivingEntity entity = (LivingEntity) event.getRightClicked();
-            Player player = event.getPlayer();
+    public void onInteractEntity(PlayerInteractEntityEvent interactionEvent) {
+        if (interactionEvent.getRightClicked() instanceof LivingEntity) {
+            LivingEntity entity = (LivingEntity) interactionEvent.getRightClicked();
+            Player player = interactionEvent.getPlayer();
             if (player.hasPermission("blindness.use")) {
                 entity.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
                 player.sendMessage("Ты выдал эффект для сущности " + entity.getName() + ".");
             }
         }
     }
-
 }
