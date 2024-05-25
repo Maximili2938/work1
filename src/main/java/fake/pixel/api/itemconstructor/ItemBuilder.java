@@ -5,46 +5,25 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Data
+@Accessors(chain = true)
 public class ItemBuilder {
 
     private Material material;
-    private String displayName;
+    private String displayName = "";
     private List<String> lore;
-    private Map<Enchantment, Integer> enchantments;
+    private Map<Enchantment, Integer> enchantments = new HashMap<>();
     private List<ItemFlag> flags;
 
     public ItemBuilder(Material material) {
         this.material = material;
-        this.displayName = "";
-        this.lore = new ArrayList<>();
-        this.enchantments = new HashMap<>();
-        this.flags = new ArrayList<>();
-    }
-
-    public ItemBuilder withDisplayName(String displayName) {
-        this.displayName = displayName;
-        return this;
-    }
-
-    public ItemBuilder withLore(List<String> lore) {
-        this.lore = lore;
-        return this;
-    }
-
-    public ItemBuilder withEnchantments(Map<Enchantment, Integer> enchantments) {
-        this.enchantments = enchantments;
-        return this;
-    }
-
-    public ItemBuilder withFlags(List<ItemFlag> flags) {
-        this.flags = flags;
-        return this;
     }
 
     public ItemStack build() {
@@ -57,8 +36,8 @@ public class ItemBuilder {
 
             enchantments.forEach((enchantment, level) -> meta.addEnchant(enchantment, level, true));
 
-            for (ItemFlag flag : flags) {
-                meta.addItemFlags(flag);
+            if (flags != null) {
+                flags.forEach(meta::addItemFlags);
             }
 
             item.setItemMeta(meta);
