@@ -1,7 +1,6 @@
 package core.fel.craft;
 
 import core.fel.Fel;
-import org.apache.logging.log4j.core.net.Priority;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,9 +8,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -81,16 +77,41 @@ public class CraftTableCommand implements CommandExecutor {
             boolean hasIngredients = checkForIngredients(inventory);
             if (hasIngredients) {
                 String key = getCurrentCroppedCraftingKey(inventory);
-                inventory.setItem(24, recipes.getOrDefault(key, null));
+                ItemStack result = recipes.get(key);
+
+                if (result != null) {
+                    ItemStack craftedItem = result.clone();
+                    // Проверяем, есть ли byte у материала на выходе
+                    if (craftedItem.getData() != null) {
+                        byte inputByte = getInputByte(inventory);
+                        if (inputByte != -1) {
+                            craftedItem.setDurability(inputByte);
+                        }
+                    }
+                    inventory.setItem(24, craftedItem);
+                } else {
+                    inventory.setItem(24, new ItemStack(Material.AIR)); // Если рецепт не найден, возвращаем пустой слот
+                }
             } else {
-                inventory.setItem(24, null);
+                inventory.setItem(24, new ItemStack(Material.AIR)); // Если нет ингредиентов, возвращаем пустой слот
             }
         }
     }
 
+    private byte getInputByte(Inventory inventory) {
+        for (int slot : craftingSlots) {
+            ItemStack item = inventory.getItem(slot);
+            if (item != null && item.getType() != Material.AIR) {
+                return item.getData().getData();
+            }
+        }
+        return -1; // Если byte не найден, возвращаем -1
+    }
+
     private boolean checkForIngredients(Inventory inventory) {
-        for (ItemStack item : inventory.getContents()) {
-            if (item != null && !item.getType().equals(Material.AIR)) {
+        for (int slot : craftingSlots) {
+            ItemStack item = inventory.getItem(slot);
+            if (item != null && item.getType() != Material.AIR) {
                 return true;
             }
         }
@@ -155,7 +176,7 @@ public class CraftTableCommand implements CommandExecutor {
 
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                if (grid[row][col] != null) {
+                if (grid[row][col] != null && grid[row][col].getType() != Material.AIR) {
                     found = true;
                     if (row < minY) minY = row;
                     if (row > maxY) maxY = row;
@@ -170,8 +191,7 @@ public class CraftTableCommand implements CommandExecutor {
         for (int row = minY; row <= maxY; row++) {
             for (int col = minX; col <= maxX; col++) {
                 ItemStack item = grid[row][col];
-                if (item != null) {
-                    // Include only base material type
+                if (item != null && item.getType() != Material.AIR) {
                     key.append(item.getType().toString().split(":")[0]);
                 } else {
                     key.append("NULL");
@@ -183,4 +203,5 @@ public class CraftTableCommand implements CommandExecutor {
 
         return key.toString();
     }
+
 }
