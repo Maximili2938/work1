@@ -19,7 +19,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class ItemFirst implements IItem, Listener {
+public class ItemFirst implements IItem {
 
     @Override
     public ItemStack getItem() {
@@ -31,7 +31,7 @@ public class ItemFirst implements IItem, Listener {
                 .build();
     }
 
-    @EventHandler
+    @Override
     public void onDrop(PlayerDropItemEvent event) {
         new BukkitRunnable() {
             @Override
