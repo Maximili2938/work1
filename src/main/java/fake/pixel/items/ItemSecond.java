@@ -1,7 +1,7 @@
 package fake.pixel.items;
 
 import fake.pixel.Gul;
-import fake.pixel.api.IItem;
+import fake.pixel.api.Item;
 import fake.pixel.api.itemconstructor.ItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemSecond implements IItem {
+public class ItemSecond implements Item {
 
     private final Map<Player, BukkitRunnable> flameTasks = new HashMap<>();
     private static final double PI = Math.PI;

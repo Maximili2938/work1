@@ -1,6 +1,6 @@
 package fake.pixel.items;
 
-import fake.pixel.api.IItem;
+import fake.pixel.api.Item;
 import fake.pixel.api.itemconstructor.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class ItemThird implements IItem {
+public class ItemThird implements Item {
 
     @Override
     public ItemStack getItem() {

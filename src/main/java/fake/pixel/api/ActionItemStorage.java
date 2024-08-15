@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 public class ActionItemStorage {
 
-    private HashMap<ItemStack, IItem> items = new HashMap<>();
+    private HashMap<ItemStack, Item> items = new HashMap<>();
 
-    public void register(IItem item){
+    public void register(Item item){
         items.put(item.getItem(), item);
     }
 
-    public HashMap<ItemStack, IItem> getItems() {
+    public HashMap<ItemStack, Item> getItems() {
         return items;
     }
 

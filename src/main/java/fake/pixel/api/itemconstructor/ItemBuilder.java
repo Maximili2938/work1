@@ -1,5 +1,6 @@
 package fake.pixel.api.itemconstructor;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -8,6 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +54,17 @@ public class ItemBuilder {
     }
 
     public ItemBuilder withLore(List<String> lore) {
-        this.lore = lore;
+        if (lore != null) {
+            List<String> updatedLore = new ArrayList<>();
+            for (String line : lore) {
+                updatedLore.add(line.replace('&', '§'));
+            }
+            this.lore = updatedLore;
+        }
         return this;
     }
+
+
 
     public ItemBuilder withEnchantments(Map<Enchantment, Integer> enchantments) {
         this.enchantments = enchantments;
