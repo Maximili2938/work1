@@ -21,7 +21,7 @@ public class GiveItemEvent implements Listener {
 
         Player player = event.getPlayer();
 
-        player.sendMessage("You got " + itemFirst.getName() + "! And his RARITY is " + itemFirst.getRarity().withPrefixType().toUpperCase() + "Next: " + itemFirst.getRarity().next() + "" + itemFirst.getStat(Stat.Speed) + "след ->" + itemFirst.getStat(Stat.Damage));
+        player.sendMessage("You got " + itemFirst.getName() + "! And his RARITY is " + itemFirst.getRarity().withPrefixType().toUpperCase() + "Next: " + itemFirst.getRarity().next() + "" + itemFirst.getStat(Stat.SPEED) + "след ->" + itemFirst.getStat(Stat.DAMAGE));
 
         Inventory playerInventory = event.getPlayer().getInventory();
 

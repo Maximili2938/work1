@@ -14,53 +14,56 @@ import java.util.Collections;
 
 public class HyperionItem implements Item, ItemConstructor {
 
+    private static final String ID = "HYPERION";
+    private static final String NAME = "§7Hyperion";
+    private static final Material MATERIAL = Material.DIAMOND_SWORD;
+    private static final ItemType TYPE = ItemType.Sword;
+    private static final ItemRarity RARITY = ItemRarity.LEGENDARY;
+
     @Override
     public String getId() {
-        return "HYPERION";
+        return ID;
     }
 
-    //
     @Override
     public String getName() {
-        return "§7Hyperion";
+        return NAME;
     }
 
     @Override
     public Material getMaterial() {
-        return Material.DIAMOND_SWORD;
+        return MATERIAL;
     }
 
     @Override
     public ItemType getType() {
-        return ItemType.Sword;
+        return TYPE;
     }
 
     @Override
     public ItemRarity getRarity() {
-        return ItemRarity.LEGENDARY;
+        return RARITY;
     }
-
 
     @Override
     public double getStat(Stat stat) {
         switch (stat) {
-            case Damage:
+            case DAMAGE:
                 return 130;
-            case Strength:
+            case STRENGTH:
                 return 90;
-            case Speed:
+            case SPEED:
                 return 300;
             default:
                 return 0;
         }
     }
 
-
     @Override
     public ItemStack getItem() {
         return new ItemBuilder(getMaterial())
                 .withDisplayName(getName())
-                .withLore(Arrays.asList("&7Тип: Ифритовый стержень", "&aРедкость: " + getRarity().withPrefixType().toUpperCase(), "ТЕСТ"))
+                .withLore(Arrays.asList("§7Тип: Ифритовый стержень", "§aРедкость: " + getRarity().withPrefixType().toUpperCase(), "§7ТЕСТ"))
                 .withEnchantments(Collections.singletonMap(Enchantment.DAMAGE_ALL, 5))
                 .withFlags(Arrays.asList(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS))
                 .build();
@@ -68,9 +71,7 @@ public class HyperionItem implements Item, ItemConstructor {
 
     @Override
     public void onDrop(PlayerDropItemEvent event) {
-
         Player player = event.getPlayer();
         player.sendMessage("Hello!");
-
     }
 }
