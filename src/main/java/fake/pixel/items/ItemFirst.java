@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class ItemFirst implements Item, ItemConstructor {
+public class HyperionItem implements Item, ItemConstructor {
 
     @Override
     public String getId() {
