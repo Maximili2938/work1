@@ -45,4 +45,25 @@ public class ItemBuilder {
 
         return item;
     }
+
+    public ItemBuilder withDisplayName(String displayName) {
+        this.displayName = displayName;
+        return this;
+    }
+
+    public ItemBuilder withLore(List<String> lore) {
+        this.lore = lore;
+        return this;
+    }
+
+    public ItemBuilder withEnchantments(Map<Enchantment, Integer> enchantments) {
+        this.enchantments = enchantments;
+        return this;
+    }
+
+    public ItemBuilder withFlags(List<ItemFlag> flags) {
+        this.flags = flags;
+        return this;
+    }
+
 }

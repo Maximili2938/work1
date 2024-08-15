@@ -18,7 +18,7 @@ public interface IItem {
 
     }
 
-    default void onPicUp(PlayerPickupItemEvent event) {
+    default void onPicup(PlayerPickupItemEvent event) {
 
     }
 

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="tessss">
+    <output-path>$USER_HOME$/OneDrive/Рабочий стол/Новая папка/plugins</output-path>
+    <root id="archive" name="tessss.jar">
+      <element id="module-output" name="Pixel" />
+    </root>
+  </artifact>
+</component>

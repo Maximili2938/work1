@@ -40,7 +40,7 @@ public class ItemListener implements Listener {
         if (storage != null) {
             ItemStack itemStack = event.getItem().getItemStack();
             if (itemStack != null && storage.getItems().containsKey(itemStack)) {
-                storage.getItems().get(itemStack).onPicUp(event);
+                storage.getItems().get(itemStack).onPicup(event);
             }
         }
     }
