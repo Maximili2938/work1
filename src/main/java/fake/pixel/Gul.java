@@ -3,7 +3,7 @@ package fake.pixel;
 import fake.pixel.api.ActionItemStorage;
 import fake.pixel.api.ItemListener;
 import fake.pixel.events.GiveItemEvent;
-import fake.pixel.items.ItemFirst;
+import fake.pixel.items.HyperionItem;
 import fake.pixel.items.ItemSecond;
 import fake.pixel.items.ItemThird;
 import org.bukkit.Bukkit;
@@ -34,7 +34,7 @@ public final class Gul extends JavaPlugin {
         ItemSecond itemSecond = new ItemSecond();
         storage.register(itemSecond);
 
-        ItemFirst itemFirst = new ItemFirst();
+        HyperionItem itemFirst = new HyperionItem();
         storage.register(itemFirst);
 
         ItemListener itemListener = new ItemListener(storage);

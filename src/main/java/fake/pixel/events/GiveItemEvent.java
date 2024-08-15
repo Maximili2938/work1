@@ -1,7 +1,7 @@
 package fake.pixel.events;
 
 import fake.pixel.api.itemconstructor.Stat;
-import fake.pixel.items.ItemFirst;
+import fake.pixel.items.HyperionItem;
 import fake.pixel.items.ItemSecond;
 import fake.pixel.items.ItemThird;
 import org.bukkit.entity.Player;
@@ -10,8 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 
-import java.util.Locale;
-
 public class GiveItemEvent implements Listener {
 
     @EventHandler
@@ -19,7 +17,7 @@ public class GiveItemEvent implements Listener {
 
         ItemSecond itemSecond = new ItemSecond();
         ItemThird itemThird = new ItemThird();
-        ItemFirst itemFirst = new ItemFirst();
+        HyperionItem itemFirst = new HyperionItem();
 
         Player player = event.getPlayer();
 
