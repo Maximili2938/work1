@@ -19,6 +19,7 @@ public class HyperionItem implements Item, ItemConstructor {
         return "HYPERION";
     }
 
+    //
     @Override
     public String getName() {
         return "§7Hyperion";
